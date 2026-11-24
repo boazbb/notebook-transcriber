@@ -66,7 +66,7 @@ run locally. In this repository, `.gitignore` excludes scans, audio, images, pro
 Hebrew text.
 
 ## Credits
-
+- All code generated with Claude Code.
 - Speech recognition: [ivrit.ai](https://www.ivrit.ai) Hebrew Whisper models. Hebrew language models and
   niqqud: [Dicta](https://dicta.org.il) (DictaBERT, Nakdan via dicta-onnx). Line detection: Kraken.
 - App icon: <a href="https://www.flaticon.com/free-icons/journalism" title="journalism icons">Journalism icons created by Magnific - Flaticon</a>

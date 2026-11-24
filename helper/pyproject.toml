@@ -1,0 +1,21 @@
+[project]
+name = "notebook-helper"
+version = "0.1.0"
+description = "Pipeline helper for the notebook transcriber (JSON-RPC over stdio)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "av>=16",
+    "dicta-onnx>=1.0.9",
+    "faster-whisper>=1.2.1",
+    "huggingface-hub>=0.30",
+    "numpy>=2.0",
+    "opencv-python-headless>=4.10",
+    "pypdfium2>=4.30",
+    "scikit-image>=0.24",
+    "scikit-learn>=1.9.1",
+    "torch>=2.9",
+    "transformers>=4.50",
+]
+
+[tool.uv]
+package = false

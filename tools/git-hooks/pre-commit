@@ -1,0 +1,28 @@
+#!/bin/sh
+# Refuse commits that contain private material (scans, recordings, transcripts, projects, datasets),
+# even if forced past .gitignore. Install: cp tools/git-hooks/pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit
+fail=0
+files=$(git diff --cached --name-only --diff-filter=ACMR)
+for f in $files; do
+  case "$f" in
+    docs/icon.png|app/assets/icon.png|app/src/renderer/icon.png) continue ;;
+  esac
+  case "$f" in
+    test_files/*|test_projects/*|dataset/*|data/*|spike/out/*|*.ntproj/*|\
+    *.pdf|*.PDF|*.m4a|*.wav|*.mp3|*.aiff|*.flac|*.ogg|*.png|*.jpg|*.jpeg|*.heic)
+      echo "pre-commit: refusing private file: $f"; fail=1 ;;
+  esac
+done
+# story text: a line with 8 or more Hebrew words in a row (code and docs only use short Hebrew examples)
+for f in $files; do
+  [ -f "$f" ] || continue
+  if git show ":$f" 2>/dev/null | LC_ALL=en_US.UTF-8 grep -nE '([א-ת"׳״,.:;-]+[[:space:]]+){7}[א-ת]' >/dev/null 2>&1; then
+    lines=$(git show ":$f" | LC_ALL=en_US.UTF-8 grep -nE '([א-ת"׳״,.:;-]+[[:space:]]+){7}[א-ת]' | cut -d: -f1 | head -5 | tr '\n' ' ')
+    echo "pre-commit: $f has a long run of Hebrew text (story text?) on line(s): $lines"
+    fail=1
+  fi
+done
+if [ $fail -ne 0 ]; then
+  echo "pre-commit: commit refused. Remove those files / lines (git restore --staged <file>)."
+  exit 1
+fi

@@ -1,0 +1,36 @@
+# ── Private material: scans, recordings, transcripts, projects, datasets. NEVER commit. ──
+test_files/
+test_projects/
+dataset/
+data/
+*.ntproj/
+*.pdf
+*.m4a
+*.wav
+*.mp3
+*.aiff
+*.flac
+*.ogg
+*.jpg
+*.jpeg
+*.heic
+# images are page scans / overlays — except the app icon
+*.png
+!/docs/icon.png
+!/app/assets/icon.png
+!/app/src/renderer/icon.png
+
+# spike outputs (page images, overlays, logs)
+spike/out/
+spike/logs/
+spike/models/
+
+# builds, dependencies, environments
+app/node_modules/
+app/dist/
+app/release/
+release/helper/
+**/.venv/
+__pycache__/
+*.pyc
+.DS_Store
